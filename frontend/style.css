@@ -12,7 +12,7 @@ body {
     overflow: hidden;
 }
 
-/* Sidebar Styles */
+
 .sidebar {
     width: 280px;
     background: rgba(15, 23, 42, 0.95);
@@ -122,7 +122,7 @@ body {
     font-size: 20px;
 }
 
-/* Main Content Styles */
+
 .main {
     flex: 1;
     display: flex;
@@ -164,7 +164,7 @@ body {
     padding: 20px;
 }
 
-/* Welcome Message */
+
 .welcome-message {
     text-align: center;
     color: white;
@@ -209,7 +209,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Message Styles */
+
 .message {
     margin-bottom: 20px;
     display: flex;
@@ -253,7 +253,7 @@ body {
     display: inline-block;
 }
 
-/* Image Card */
+
 .image-card {
     background: white;
     border-radius: 16px;
@@ -305,7 +305,7 @@ body {
     transform: translateY(-1px);
 }
 
-/* Marketing Copy Card */
+
 .copy-card {
     background: white;
     border-radius: 16px;
@@ -328,7 +328,7 @@ body {
     font-size: 14px;
 }
 
-/* Typing Indicator */
+
 .typing-indicator {
     display: flex;
     gap: 4px;
@@ -354,7 +354,7 @@ body {
     30% { transform: translateY(-10px); opacity: 1; }
 }
 
-/* Input Area */
+
 .input-area {
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
@@ -398,7 +398,7 @@ body {
     cursor: not-allowed;
 }
 
-/* Toast Notification */
+
 .toast {
     position: fixed;
     bottom: 20px;
@@ -423,7 +423,7 @@ body {
     }
 }
 
-/* Scrollbar */
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -441,7 +441,7 @@ body {
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .sidebar {
         width: 250px;
