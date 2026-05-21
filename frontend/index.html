@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViralGen AI - AI Advertisement Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <button class="new-chat-btn" onclick="startNewChat()">+ New Chat</button>
+        <input type="text" class="search-input" placeholder="Search history..." id="searchInput" onkeyup="searchHistory(this.value)">
+        
+        <div class="section">
+            <h4>Recent Chats</h4>
+            <div id="recentHistory"></div>
+        </div>
+        
+        <div class="section">
+            <h4>All History</h4>
+            <div id="allHistory"></div>
+        </div>
+        
+        <div class="user-profile">
+            <div class="user-avatar">👤</div>
+            <div style="color: white;">Premium User</div>
+            <div style="color: rgba(255,255,255,0.6); font-size: 12px;">GPT-4 Turbo</div>
+        </div>
+    </div>
+    
+    <div class="main">
+        <div class="top-bar">
+            <div class="model-badge">🤖 GPT-4 Turbo + DALL-E 3</div>
+            <select id="styleSelect" class="style-select">
+                <option value="luxury">✨ Luxury & Elegant</option>
+                <option value="modern">🚀 Modern & Futuristic</option>
+                <option value="minimal">🎯 Minimal & Clean</option>
+                <option value="funny">😄 Funny & Witty</option>
+                <option value="professional">💼 Professional & Trustworthy</option>
+            </select>
+        </div>
+        
+        <div id="chatContainer" class="chat-container">
+            <div class="welcome-message">
+                <div class="welcome-icon">🎨</div>
+                <h2>Welcome to ViralGen AI</h2>
+                <p>Describe your advertisement idea and let AI create stunning visuals & copy</p>
+                <div class="example-prompts">
+                    <div class="example-prompt" onclick="setExample('Luxury watch for professionals, gold and black design')">⌚ Luxury watch for professionals</div>
+                    <div class="example-prompt" onclick="setExample('Eco-friendly water bottle, active lifestyle, nature')">💧 Eco-friendly water bottle</div>
+                    <div class="example-prompt" onclick="setExample('Modern sneakers with LED lights, futuristic design')">👟 Modern sneakers with LED</div>
+                    <div class="example-prompt" onclick="setExample('Coffee shop promotion, cozy atmosphere, morning vibe')">☕ Coffee shop promotion</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="promptInput" class="prompt-input" placeholder="Describe your advertisement idea..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendPrompt()">➤</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
