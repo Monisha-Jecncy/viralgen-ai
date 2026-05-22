@@ -9,7 +9,7 @@ const promptInput = document.getElementById("promptInput");
 const styleSelect = document.getElementById("styleSelect");
 const sendBtn = document.querySelector(".send-btn");
 
-// Initialize
+
 document.addEventListener("DOMContentLoaded", () => {
     renderHistory();
 });
