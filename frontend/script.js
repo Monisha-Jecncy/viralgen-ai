@@ -192,7 +192,7 @@ function copyToClipboard(text) {
 }
 
 function openImageModal(url) {
-    // Simple image preview
+    
     const modal = document.createElement("div");
     modal.style.cssText = `
         position: fixed;
@@ -233,7 +233,7 @@ async function sendPrompt() {
 
     const style = styleSelect.value;
 
-    // Add user message to chat
+    
     addUserMessage(prompt);
     promptInput.value = "";
     addTypingIndicator();
