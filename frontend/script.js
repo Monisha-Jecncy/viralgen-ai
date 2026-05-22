@@ -1,9 +1,9 @@
-// API Configuration
+
 const API_BASE_URL = "http://localhost:8000/api";
 let chatHistory = JSON.parse(localStorage.getItem("chatHistory") || "[]");
 let isGenerating = false;
 
-// DOM Elements
+
 const chatContainer = document.getElementById("chatContainer");
 const promptInput = document.getElementById("promptInput");
 const styleSelect = document.getElementById("styleSelect");
