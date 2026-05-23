@@ -9,11 +9,11 @@ class Config:
     STABILITY_API_KEY = os.getenv("STABILITY_API_KEY")
     REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 
-    # Image settings
+    
     IMAGE_WIDTH = 1024
     IMAGE_HEIGHT = 1024
 
-    # Generation settings
+    
     JOB_TIMEOUT_SECONDS = 120
 
     # Style prompts for different brand voices
