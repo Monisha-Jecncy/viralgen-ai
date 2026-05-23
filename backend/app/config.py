@@ -16,7 +16,7 @@ class Config:
     
     JOB_TIMEOUT_SECONDS = 120
 
-    # Style prompts for different brand voices
+    
     STYLE_PROMPTS = {
         "luxury": "Create a premium luxury advertisement. Use elegant, sophisticated language. Emphasize exclusivity, craftsmanship, and status. Visual should be opulent with gold/black tones.",
         "modern": "Create a contemporary, cutting-edge advertisement. Use trendy language, focus on innovation and technology. Visual should be sleek with neon/blue tones.",
