@@ -30,7 +30,7 @@ async def generate_ad(request: GenerateRequest):
             request.prompt, request.style
         )
 
-        # Step 3: Generate image
+        
         image_url = await ImageService.generate_image(enhanced_prompt)
 
         return JSONResponse(
