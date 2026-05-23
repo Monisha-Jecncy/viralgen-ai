@@ -11,7 +11,7 @@ from app.services.prompt_enhancer import PromptEnhancer
 
 router = APIRouter()
 
-# In-memory job storage (replace with Redis/DB for production)
+
 jobs = {}
 
 
@@ -20,12 +20,12 @@ async def generate_ad(request: GenerateRequest):
     """Generate ad image and copy - synchronous for demo"""
 
     try:
-        # Step 1: Enhance prompt
+        
         enhanced_prompt = await PromptEnhancer.enhance_prompt(
             request.prompt, request.style
         )
 
-        # Step 2: Generate marketing copy
+        
         marketing_copy = await LLMService.generate_marketing_copy(
             request.prompt, request.style
         )
