@@ -106,7 +106,7 @@ class ImageService:
             font = ImageFont.load_default()
             font_small = ImageFont.load_default()
 
-        # Center text
+    
         lines = (
             prompt.split("\n")
             if "\n" in prompt
