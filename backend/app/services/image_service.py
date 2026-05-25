@@ -121,7 +121,7 @@ class ImageService:
             draw.text((x, y), line[:50], fill=(255, 255, 255), font=font)
             y += 45
 
-        # Add AI generated watermark
+        
         watermark = "AI Generated • ViralGen AI"
         bbox = draw.textbbox((0, 0), watermark, font=font_small)
         text_width = bbox[2] - bbox[0]
