@@ -11,7 +11,7 @@ class ImageService:
     async def generate_image(prompt: str) -> str:
         """Generate image using Stability AI or fallback to local generation"""
 
-        # Try Stability AI
+        
         if (
             Config.STABILITY_API_KEY
             and Config.STABILITY_API_KEY != "your_stability_api_key_here"
@@ -41,7 +41,7 @@ class ImageService:
             except Exception as e:
                 print(f"Stability AI error: {e}")
 
-        # Fallback to DALL-E if API key available
+        
         if Config.OPENAI_API_KEY:
             try:
                 import openai
@@ -58,7 +58,7 @@ class ImageService:
 
                 image_url = response.data[0].url
 
-                # Download and convert to base64 for frontend
+                
                 async with httpx.AsyncClient() as client:
                     img_response = await client.get(image_url)
                     img_base64 = base64.b64encode(img_response.content).decode()
@@ -67,7 +67,7 @@ class ImageService:
             except Exception as e:
                 print(f"DALL-E error: {e}")
 
-        # Final fallback: generate placeholder with text
+    
         return await ImageService._generate_placeholder(prompt)
 
     @staticmethod
@@ -79,7 +79,7 @@ class ImageService:
         )
         draw = ImageDraw.Draw(img)
 
-        # Draw gradient-like effect
+        
         for i in range(Config.IMAGE_HEIGHT):
             color_value = int(30 + (i / Config.IMAGE_HEIGHT) * 50)
             draw.line(
@@ -87,14 +87,14 @@ class ImageService:
                 fill=(color_value, color_value, color_value + 20),
             )
 
-        # Draw border
+        
         for i in range(3):
             draw.rectangle(
                 [i, i, Config.IMAGE_WIDTH - i - 1, Config.IMAGE_HEIGHT - i - 1],
                 outline=(100, 100, 150),
             )
 
-        # Add text
+        
         try:
             font = ImageFont.truetype(
                 "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 36
