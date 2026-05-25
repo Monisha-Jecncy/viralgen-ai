@@ -132,7 +132,7 @@ class ImageService:
             font=font_small,
         )
 
-        # Convert to base64
+        
         buffered = io.BytesIO()
         img.save(buffered, format="PNG")
         img_base64 = base64.b64encode(buffered.getvalue()).decode()
