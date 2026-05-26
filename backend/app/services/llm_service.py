@@ -44,7 +44,7 @@ class LLMService:
             )
 
             content = response.choices[0].message.content
-            # Clean response
+            
             content = content.replace("```json", "").replace("```", "").strip()
             result = json.loads(content)
 
