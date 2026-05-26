@@ -48,7 +48,7 @@ class LLMService:
             content = content.replace("```json", "").replace("```", "").strip()
             result = json.loads(content)
 
-            # Format for display
+            
             formatted = f"""
 ✨ **{result.get('headline', '')}** ✨
 
