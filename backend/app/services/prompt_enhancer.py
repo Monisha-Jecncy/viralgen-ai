@@ -43,7 +43,7 @@ class PromptEnhancer:
             enhanced = response.choices[0].message.content.strip()
 
         except Exception as e:
-            # Fallback enhancement
+            
             enhanced = f"Professional, high-quality advertisement image of {brief}, cinematic lighting, 8k resolution, photorealistic, detailed, vibrant colors, sharp focus, commercial photography style"
 
         return enhanced
