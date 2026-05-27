@@ -54,7 +54,7 @@ The system supports different advertisement styles to create professional and en
 
 ## 📂 Project Structure
 
-```text
+
 MultiAdai/
 │── backend/
 │   ├── app/
