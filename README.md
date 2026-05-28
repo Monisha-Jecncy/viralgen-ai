@@ -11,7 +11,7 @@ ViralGen AI is designed to simplify advertisement creation by using **Generative
 - 📢 Marketing slogans and branding ideas  
 - 🖼️ Multi-modal output (Text + Images)
 
-The system supports different advertisement styles to create professional and engaging promotional content.
+
 
 
 
