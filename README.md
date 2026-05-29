@@ -160,4 +160,3 @@ http://localhost:3000
 - Social media ad templates  
 - AI video advertisement generation  
 - Advanced personalization options
-
