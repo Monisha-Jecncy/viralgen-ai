@@ -11,7 +11,6 @@ from app.services.prompt_enhancer import PromptEnhancer
 
 router = APIRouter()
 
-
 jobs = {}
 
 
