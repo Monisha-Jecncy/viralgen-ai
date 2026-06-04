@@ -25,9 +25,7 @@ class PromptEnhancer:
         - Mood and atmosphere
         - Technical photography terms
         
-        Return ONLY the enhanced prompt, no explanations or extra text.
-        Keep it under 300 words.
-        """
+        
 
         try:
             response = await openai.ChatCompletion.acreate(
