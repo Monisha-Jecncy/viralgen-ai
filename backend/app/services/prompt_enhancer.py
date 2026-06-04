@@ -25,7 +25,9 @@ class PromptEnhancer:
         - Mood and atmosphere
         - Technical photography terms
         
-        
+        Return ONLY the enhanced prompt, no explanations or extra text.
+        Keep it under 300 words.
+    """
 
         try:
             response = await openai.ChatCompletion.acreate(
@@ -41,7 +43,7 @@ class PromptEnhancer:
             enhanced = response.choices[0].message.content.strip()
 
         except Exception as e:
-            
+
             enhanced = f"Professional, high-quality advertisement image of {brief}, cinematic lighting, 8k resolution, photorealistic, detailed, vibrant colors, sharp focus, commercial photography style"
 
         return enhanced
