@@ -36,3 +36,4 @@ class JobStatus(BaseModel):
     error: Optional[str] = None
     created_at: datetime
     updated_at: datetime
+c
