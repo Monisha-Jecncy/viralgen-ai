@@ -1,17 +1,18 @@
 import io
 import base64
 import httpx
-import asyncio
 from PIL import Image, ImageDraw, ImageFont
+from openai import AsyncOpenAI
+
 from app.config import Config
 
 
 class ImageService:
     @staticmethod
     async def generate_image(prompt: str) -> str:
-        """Generate image using Stability AI or fallback to local generation"""
+        """Generate image using Stability AI, OpenAI, or fallback placeholder"""
 
-        
+        # Stability AI
         if (
             Config.STABILITY_API_KEY
             and Config.STABILITY_API_KEY != "your_stability_api_key_here"
@@ -38,36 +39,33 @@ class ImageService:
                         data = response.json()
                         image_data = data["artifacts"][0]["base64"]
                         return f"data:image/png;base64,{image_data}"
+
+                    print(
+                        f"Stability AI Error: {response.status_code} - {response.text}"
+                    )
+
             except Exception as e:
                 print(f"Stability AI error: {e}")
 
-        
+        # OpenAI GPT Image
         if Config.OPENAI_API_KEY:
             try:
-                import openai
+                client = AsyncOpenAI(api_key=Config.OPENAI_API_KEY)
 
-                openai.api_key = Config.OPENAI_API_KEY
-
-                response = await openai.Image.acreate(
-                    model="dall-e-3",
+                response = await client.images.generate(
+                    model="gpt-image-1",
                     prompt=prompt,
                     size="1024x1024",
-                    quality="standard",
-                    n=1,
                 )
 
-                image_url = response.data[0].url
+                image_b64 = response.data[0].b64_json
 
-                
-                async with httpx.AsyncClient() as client:
-                    img_response = await client.get(image_url)
-                    img_base64 = base64.b64encode(img_response.content).decode()
-                    return f"data:image/png;base64,{img_base64}"
+                return f"data:image/png;base64,{image_b64}"
 
             except Exception as e:
-                print(f"DALL-E error: {e}")
+                print(f"OpenAI Image error: {e}")
 
-    
+        # Fallback Placeholder
         return await ImageService._generate_placeholder(prompt)
 
     @staticmethod
@@ -75,11 +73,13 @@ class ImageService:
         """Generate a professional-looking placeholder image"""
 
         img = Image.new(
-            "RGB", (Config.IMAGE_WIDTH, Config.IMAGE_HEIGHT), color=(30, 30, 50)
+            "RGB",
+            (Config.IMAGE_WIDTH, Config.IMAGE_HEIGHT),
+            color=(30, 30, 50),
         )
+
         draw = ImageDraw.Draw(img)
 
-        
         for i in range(Config.IMAGE_HEIGHT):
             color_value = int(30 + (i / Config.IMAGE_HEIGHT) * 50)
             draw.line(
@@ -87,54 +87,65 @@ class ImageService:
                 fill=(color_value, color_value, color_value + 20),
             )
 
-        
         for i in range(3):
             draw.rectangle(
                 [i, i, Config.IMAGE_WIDTH - i - 1, Config.IMAGE_HEIGHT - i - 1],
                 outline=(100, 100, 150),
             )
 
-        
         try:
             font = ImageFont.truetype(
-                "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 36
+                "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                36,
             )
             font_small = ImageFont.truetype(
-                "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20
+                "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                20,
             )
-        except:
+        except Exception:
             font = ImageFont.load_default()
             font_small = ImageFont.load_default()
 
-    
         lines = (
             prompt.split("\n")
             if "\n" in prompt
             else [prompt[i : i + 40] for i in range(0, len(prompt), 40)]
         )
+
         y = Config.IMAGE_HEIGHT // 2 - 50
 
         for line in lines[:3]:
             bbox = draw.textbbox((0, 0), line[:50], font=font)
             text_width = bbox[2] - bbox[0]
             x = (Config.IMAGE_WIDTH - text_width) // 2
-            draw.text((x, y), line[:50], fill=(255, 255, 255), font=font)
+
+            draw.text(
+                (x, y),
+                line[:50],
+                fill=(255, 255, 255),
+                font=font,
+            )
+
             y += 45
 
-        
         watermark = "AI Generated • ViralGen AI"
+
         bbox = draw.textbbox((0, 0), watermark, font=font_small)
         text_width = bbox[2] - bbox[0]
+
         draw.text(
-            ((Config.IMAGE_WIDTH - text_width) // 2, Config.IMAGE_HEIGHT - 50),
+            (
+                (Config.IMAGE_WIDTH - text_width) // 2,
+                Config.IMAGE_HEIGHT - 50,
+            ),
             watermark,
             fill=(150, 150, 180),
             font=font_small,
         )
 
-        
         buffered = io.BytesIO()
         img.save(buffered, format="PNG")
+
         img_base64 = base64.b64encode(buffered.getvalue()).decode()
 
         return f"data:image/png;base64,{img_base64}"
